@@ -11,6 +11,8 @@ pub enum Change {
     Yanked(CrateVersion),
     /// A crate was deleted
     Deleted(String),
+    /// a crate version was deleted
+    VersionDeleted(CrateVersion),
 }
 
 impl fmt::Display for Change {
@@ -21,7 +23,8 @@ impl fmt::Display for Change {
             match *self {
                 Change::Added(_) => "added",
                 Change::Yanked(_) => "yanked",
-                Change::Deleted(_) => "deleted",
+                Change::Deleted(_) => "crate deleted",
+                Change::VersionDeleted(_) => "version deleted",
             }
         )
     }

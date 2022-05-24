@@ -1,16 +1,15 @@
 use super::{Change, CrateVersion};
-use std::path::Path;
+use std::{collections::HashMap, path::Path};
 
 use git2::{
-    build::RepoBuilder, Delta, Error as GitError, ErrorClass, Object, ObjectType, Oid, Reference,
-    Repository, Tree,
+    build::RepoBuilder, Delta, DiffLineType, Error as GitError, ErrorClass, Object, ObjectType,
+    Oid, Reference, Repository, Tree,
 };
 use std::str;
 
-static INDEX_GIT_URL: &str = "https://github.com/rust-lang/crates.io-index";
+static INDEX_GIT_URL: &str = "https://github.com/rust-lang/crates.io-index.git";
 static LAST_SEEN_REFNAME: &str = "refs/heads/crates-index-diff_last-seen";
 static EMPTY_TREE_HASH: &str = "4b825dc642cb6eb9a060e54bf8d69288fbee4904";
-static LINE_ADDED_INDICATOR: char = '+';
 
 /// A wrapper for a repository of the crates.io index.
 pub struct Index {
@@ -243,7 +242,7 @@ impl Index {
         Ok(())
     }
 
-    /// Return all `CreateVersion`s observed between `from` and `to`. Both parameter are ref-specs
+    /// Return all `Change`s observed between `from` and `to`. Both parameter are ref-specs
     /// pointing to either a commit or a tree.
     /// Learn more about specifying revisions
     /// in the
@@ -285,13 +284,14 @@ impl Index {
             None,
         )?;
         let mut changes: Vec<Change> = Vec::new();
-        let mut deletes: Vec<String> = Vec::new();
+        let mut crate_deletes: Vec<String> = Vec::new();
+        let mut version_deletes: HashMap<(String, String), CrateVersion> = HashMap::new();
         diff.foreach(
             &mut |delta, _| {
                 if delta.status() == Delta::Deleted {
                     if let Some(path) = delta.new_file().path() {
                         if let Some(file_name) = path.file_name() {
-                            deletes.push(file_name.to_string_lossy().to_string());
+                            crate_deletes.push(file_name.to_string_lossy().to_string());
                         }
                     }
                 }
@@ -300,9 +300,6 @@ impl Index {
             None,
             None,
             Some(&mut |delta, _hunk, diffline| {
-                if diffline.origin() != LINE_ADDED_INDICATOR {
-                    return true;
-                }
                 if !matches!(delta.status(), Delta::Added | Delta::Modified) {
                     return true;
                 }
@@ -310,17 +307,37 @@ impl Index {
                 if let Ok(crate_version) =
                     serde_json::from_slice::<CrateVersion>(diffline.content())
                 {
-                    if crate_version.yanked {
-                        changes.push(Change::Yanked(crate_version));
-                    } else {
-                        changes.push(Change::Added(crate_version));
+                    match diffline.origin_value() {
+                        DiffLineType::Deletion => {
+                            // for changes (yank/unyank) we first get a line-deletion, and then an
+                            // line-addition for the same version.
+                            // For version-deletes the later addition is missing.
+                            version_deletes.insert(
+                                (crate_version.name.clone(), crate_version.version.clone()),
+                                crate_version,
+                            );
+                        }
+                        DiffLineType::Addition => {
+                            version_deletes.remove(&(
+                                crate_version.name.clone(),
+                                crate_version.version.clone(),
+                            ));
+
+                            if crate_version.yanked {
+                                changes.push(Change::Yanked(crate_version));
+                            } else {
+                                changes.push(Change::Added(crate_version));
+                            }
+                        }
+                        _ => {}
                     }
                 }
                 true
             }),
         )?;
 
-        changes.extend(deletes.iter().map(|krate| Change::Deleted(krate.clone())));
+        changes.extend(crate_deletes.into_iter().map(Change::Deleted));
+        changes.extend(version_deletes.into_values().map(Change::VersionDeleted));
         Ok(changes)
     }
 }
