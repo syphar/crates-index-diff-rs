@@ -7,7 +7,7 @@ use git2::{
 };
 use std::str;
 
-static INDEX_GIT_URL: &str = "https://github.com/rust-lang/crates.io-index.git";
+static INDEX_GIT_URL: &str = "https://github.com/rust-lang/crates.io-index-archive.git";
 static LAST_SEEN_REFNAME: &str = "refs/heads/crates-index-diff_last-seen";
 static EMPTY_TREE_HASH: &str = "4b825dc642cb6eb9a060e54bf8d69288fbee4904";
 
@@ -311,7 +311,7 @@ impl Index {
                         DiffLineType::Deletion => {
                             // for changes (yank/unyank) we first get a line-deletion, and then an
                             // line-addition for the same version.
-                            // For version-deletes the later addition is missing.
+                            // For version-deletes the latter is missing.
                             version_deletes.insert(
                                 (crate_version.name.clone(), crate_version.version.clone()),
                                 crate_version,
