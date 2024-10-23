@@ -34,6 +34,8 @@ max-performance = ["gix/max-performance"]
 http-curl = ["gix/blocking-http-transport-curl"]
 ## Use reqwest along with pure-rust TLS implementations. Needs no C toolchain, but might not be parity in features compared to curl.
 http-reqwest = ["gix/blocking-http-transport-reqwest-rust-tls"]
+## use github fast path to check for index changes before fetching
+# github-fast-path = ["dep:reqwest"]
 
 
 [dependencies]
@@ -46,6 +48,8 @@ bstr = "1.0.1"
 thiserror = "1.0.32"
 ahash = "0.8.0"
 hashbrown = { version = "0.14.0", features = ["raw"] }
+# reqwest = { version = "0.12", features = ["blocking"], optional = true }
+reqwest = { version = "0.12", features = ["blocking"] }
 
 [dev-dependencies]
 gix-testtools = "0.15.0"
