@@ -11,9 +11,6 @@ edition = "2018"
 readme = "changelog.md"
 include = ["src/**/*", "LICENSE.md", "README.md", "CHANGELOG.md"]
 
-[lib]
-test = false
-
 [[test]]
 name = "baseline"
 path = "tests/baseline.rs"

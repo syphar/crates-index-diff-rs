@@ -181,8 +181,8 @@ impl Index {
 
             let (url, _) = remote.sanitized_url_and_version(gix::remote::Direction::Fetch)?;
             if matches!(
-                dbg!(github::has_changes(&url, &from, self.branch_name)?),
-                github::FastPathRev::UpToDate
+                github::has_changes(&url, &from, self.branch_name)?,
+                github::FastPath::UpToDate
             ) {
                 from.clone()
             } else {
