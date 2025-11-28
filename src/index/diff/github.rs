@@ -1,4 +1,7 @@
-use reqwest::{StatusCode, Url};
+use ureq::http::{
+    header::{ACCEPT, IF_NONE_MATCH},
+    StatusCode, Uri,
+};
 
 #[derive(Debug)]
 pub(crate) enum FastPath {
@@ -9,14 +12,14 @@ pub(crate) enum FastPath {
 
 /// extract username & repository from a fetch URL, only if it's on Github.
 fn user_and_repo_from_url_if_github(fetch_url: &gix::Url) -> Option<(String, String)> {
-    let url = Url::parse(&fetch_url.to_string()).ok()?;
-    if url.host_str() != Some("github.com") {
+    let url: Uri = fetch_url.to_string().parse().ok()?;
+    if url.host() != Some("github.com") {
         return None;
     }
 
     // This expects GitHub urls in the form `github.com/user/repo` and nothing
     // else
-    let mut pieces = url.path_segments()?;
+    let mut pieces = url.path().strip_prefix('/')?.split('/');
     let username = pieces.next()?;
     let repository = pieces.next()?;
     let repository = repository.strip_suffix(".git").unwrap_or(repository);
@@ -45,7 +48,7 @@ pub(crate) fn has_changes(
     fetch_url: &gix::Url,
     last_seen_reference: &gix::ObjectId,
     branch_name: &str,
-) -> Result<FastPath, reqwest::Error> {
+) -> Result<FastPath, ureq::Error> {
     let (username, repository) = match user_and_repo_from_url_if_github(fetch_url) {
         Some(url) => url,
         None => return Ok(FastPath::Indeterminate),
@@ -56,14 +59,16 @@ pub(crate) fn has_changes(
         username, repository, branch_name,
     );
 
-    let client = reqwest::blocking::Client::builder()
+    let agent: ureq::Agent = ureq::Agent::config_builder()
         .user_agent("crates-index-diff")
-        .build()?;
-    let response = client
+        .build()
+        .into();
+
+    let response = agent
         .get(&url)
-        .header("Accept", "application/vnd.github.sha")
-        .header("If-None-Match", format!("\"{}\"", last_seen_reference))
-        .send()?;
+        .header(ACCEPT, "application/vnd.github.sha")
+        .header(IF_NONE_MATCH, format!("\"{}\"", last_seen_reference))
+        .call()?;
 
     let status = response.status();
     if status == StatusCode::NOT_MODIFIED {
