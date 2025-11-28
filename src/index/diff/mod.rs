@@ -70,7 +70,7 @@ pub enum Error {
         mappings: Vec<gix::remote::fetch::refmap::Mapping>,
     },
     #[error("Error when fetching GitHub fastpath.")]
-    GithubFetch(#[from] reqwest::Error),
+    GithubFetch(#[from] ureq::Error),
 }
 
 impl_from_boxed!(gix::diff::new_rewrites::Error => Error::DiffRewrites);

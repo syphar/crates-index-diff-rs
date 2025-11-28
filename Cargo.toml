@@ -45,7 +45,7 @@ bstr = "1.0.1"
 thiserror = "2"
 ahash = "0.8.0"
 hashbrown = { version = "0.16.0" }
-reqwest = { version = "0.12", features = ["blocking"] }
+ureq = "3.1.4"
 semver = { version = "1.0.27", features = ["serde"], optional = true }
 
 [dev-dependencies]
