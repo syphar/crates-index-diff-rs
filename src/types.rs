@@ -182,8 +182,9 @@ impl CrateVersion {
     /// this method will panic, matching the behavior of [`Self::version()`].
     #[cfg(feature = "chrono")]
     pub fn publish_time(&self) -> Option<DateTime<Utc>> {
-        self.publish_time.as_deref().map(|time| {
-            time.parse()
+        self.publish_time.as_deref().map(|pubtime| {
+            pubtime
+                .parse()
                 .expect("crate index publication time guarantees a valid RFC 3339 timestamp")
         })
     }
