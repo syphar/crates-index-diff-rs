@@ -119,7 +119,6 @@ fn parse_crate_version_with_pubtime() {
         "deps" : [],
         "yanked": false,
         "pubtime": "2026-03-25T12:34:56Z",
-        "v": 2
     }))
     .unwrap();
     assert_eq!(
@@ -147,7 +146,6 @@ fn parse_pubtime_with_chrono_feature() {
         "deps" : [],
         "yanked": false,
         "pubtime": "2026-03-25T12:34:56Z",
-        "v": 2
     }))
     .unwrap();
     assert_eq!(
