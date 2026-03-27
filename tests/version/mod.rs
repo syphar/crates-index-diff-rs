@@ -5,10 +5,6 @@ use semver::{Version, VersionReq};
 use serde_json::json;
 use std::collections::HashMap;
 
-fn expected_publish_time(value: &str) -> smartstring::alias::String {
-    value.into()
-}
-
 #[test]
 fn parse_crate_version() {
     let c: CrateVersion = serde_json::from_str(
@@ -135,7 +131,7 @@ fn parse_crate_version_with_pubtime() {
             dependencies: Vec::new(),
             features: HashMap::new(),
             checksum: Default::default(),
-            publish_time: Some(expected_publish_time("2026-03-25T12:34:56Z"))
+            publish_time: Some("2026-03-25T12:34:56Z".into())
         }
     );
 }
