@@ -1,6 +1,8 @@
 use std::collections::HashMap;
 
 use bstr::BString;
+#[cfg(feature = "chrono")]
+use chrono::{DateTime, Utc};
 use smartstring::alias::String as SmolString;
 use std::hash::Hash;
 use std::{fmt, slice};
@@ -156,7 +158,7 @@ pub struct CrateVersion {
     pub dependencies: Vec<Dependency>,
     /// The publication time of this release as provided by the index, if available.
     #[serde(rename = "pubtime", skip_serializing_if = "Option::is_none")]
-    pub publish_date: Option<SmolString>,
+    pub publish_time: Option<SmolString>,
 }
 
 impl CrateVersion {
@@ -172,6 +174,18 @@ impl CrateVersion {
     pub fn version(&self) -> semver::Version {
         semver::Version::parse(&self.version)
             .expect("crate index guarantees a valid semantic version")
+    }
+
+    /// Parse and return this crate's publication time as a `chrono::DateTime<Utc>`, if present.
+    ///
+    /// The crate index emits publication times as RFC 3339 timestamps. If this value is malformed,
+    /// this method will panic, matching the behavior of [`Self::version()`].
+    #[cfg(feature = "chrono")]
+    pub fn publish_time(&self) -> Option<DateTime<Utc>> {
+        self.publish_time.as_deref().map(|time| {
+            time.parse()
+                .expect("crate index publication time guarantees a valid RFC 3339 timestamp")
+        })
     }
 }
 

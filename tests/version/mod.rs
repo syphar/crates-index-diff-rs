@@ -1,7 +1,13 @@
+#[cfg(feature = "chrono")]
+use chrono::{DateTime, Utc};
 use crates_index_diff::*;
 use semver::{Version, VersionReq};
 use serde_json::json;
 use std::collections::HashMap;
+
+fn expected_publish_time(value: &str) -> smartstring::alias::String {
+    value.into()
+}
 
 #[test]
 fn parse_crate_version() {
@@ -26,7 +32,7 @@ fn parse_crate_version() {
             dependencies: Vec::new(),
             features: HashMap::new(),
             checksum: Default::default(),
-            publish_date: None
+            publish_time: None
         }
     );
 }
@@ -102,7 +108,7 @@ fn parse_crate_version_with_dependencies() {
             }],
             features: HashMap::new(),
             checksum: Default::default(),
-            publish_date: None
+            publish_time: None
         }
     );
 }
@@ -129,7 +135,27 @@ fn parse_crate_version_with_pubtime() {
             dependencies: Vec::new(),
             features: HashMap::new(),
             checksum: Default::default(),
-            publish_date: Some("2026-03-25T12:34:56Z".into())
+            publish_time: Some(expected_publish_time("2026-03-25T12:34:56Z"))
         }
+    );
+}
+
+#[cfg(feature = "chrono")]
+#[test]
+fn parse_pubtime_with_chrono_feature() {
+    let c: CrateVersion = serde_json::from_value(json!({
+        "name": "test",
+        "vers": "1.0.0",
+        "cksum": "0000000000000000000000000000000000000000000000000000000000000000",
+        "features" : {},
+        "deps" : [],
+        "yanked": false,
+        "pubtime": "2026-03-25T12:34:56Z",
+        "v": 2
+    }))
+    .unwrap();
+    assert_eq!(
+        c.publish_time(),
+        Some("2026-03-25T12:34:56Z".parse::<DateTime<Utc>>().unwrap())
     );
 }
