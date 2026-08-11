@@ -13,7 +13,7 @@ Replace unmaintained `smartstr` crate with `compact_str`.
 
 <csr-read-only-do-not-edit/>
 
- - 2 commits contributed to the release.
+ - 3 commits contributed to the release.
  - 55 days passed between releases.
  - 0 commits were understood as [conventional](https://www.conventionalcommits.org).
  - 0 issues like '(#ID)' were seen in commit messages
@@ -25,6 +25,7 @@ Replace unmaintained `smartstr` crate with `compact_str`.
 <details><summary>view details</summary>
 
  * **Uncategorized**
+    - Adjusting changelogs prior to release of crates-index-diff v31.0.1 ([`5708aa7`](https://github.com/Byron/crates-index-diff-rs/commit/5708aa79e1bbe3af1db1da22f763d4eae564c7a9))
     - Merge pull request #57 from syphar/smar-str ([`777df0b`](https://github.com/Byron/crates-index-diff-rs/commit/777df0b08beffecc4420067d82cb36588248f877))
     - Replace unmaintained `smartstring` crate with `compact_str` ([`8dd62a8`](https://github.com/Byron/crates-index-diff-rs/commit/8dd62a8134aaf860e75c4374172baf28f4ebf2d4))
 </details>
