@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 
 use bstr::BString;
-use smartstring::alias::String as SmolString;
+use compact_str::CompactString as SmolString;
 use std::hash::Hash;
 use std::{fmt, slice};
 
