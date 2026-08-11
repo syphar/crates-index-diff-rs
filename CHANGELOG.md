@@ -5,16 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 31.0.0 (2026-06-17)
+## 31.0.1 (2026-08-11)
 
-Bump `gix` to v0.84
+Replace unmaintained `smartstr` crate with `compact_str`.
 
 ### Commit Statistics
 
 <csr-read-only-do-not-edit/>
 
- - 3 commits contributed to the release.
- - 40 days passed between releases.
+ - 2 commits contributed to the release.
+ - 55 days passed between releases.
  - 0 commits were understood as [conventional](https://www.conventionalcommits.org).
  - 0 issues like '(#ID)' were seen in commit messages
 
@@ -25,6 +25,31 @@ Bump `gix` to v0.84
 <details><summary>view details</summary>
 
  * **Uncategorized**
+    - Merge pull request #57 from syphar/smar-str ([`777df0b`](https://github.com/Byron/crates-index-diff-rs/commit/777df0b08beffecc4420067d82cb36588248f877))
+    - Replace unmaintained `smartstring` crate with `compact_str` ([`8dd62a8`](https://github.com/Byron/crates-index-diff-rs/commit/8dd62a8134aaf860e75c4374172baf28f4ebf2d4))
+</details>
+
+## 31.0.0 (2026-06-17)
+
+Bump `gix` to v0.84
+
+### Commit Statistics
+
+<csr-read-only-do-not-edit/>
+
+ - 4 commits contributed to the release.
+ - 41 days passed between releases.
+ - 0 commits were understood as [conventional](https://www.conventionalcommits.org).
+ - 0 issues like '(#ID)' were seen in commit messages
+
+### Commit Details
+
+<csr-read-only-do-not-edit/>
+
+<details><summary>view details</summary>
+
+ * **Uncategorized**
+    - Release crates-index-diff v31.0.0 ([`2a41376`](https://github.com/Byron/crates-index-diff-rs/commit/2a413762300a66b6e7bfe96b0035f972bc01b755))
     - Update changelog prior to release ([`130320e`](https://github.com/Byron/crates-index-diff-rs/commit/130320ec3bb0d5fdb739d740f7744ddb7d8b9111))
     - Merge pull request #56 from syphar/upgrades ([`f51d6fd`](https://github.com/Byron/crates-index-diff-rs/commit/f51d6fdda5a673949d40b08351733b255a389a94))
     - Update gix to 0.84, hashbrown to 0.17, gix-testtools to 0.19 ([`f7ebb4b`](https://github.com/Byron/crates-index-diff-rs/commit/f7ebb4b53f1a79b2129838b798ecba4c96d8ddf4))
@@ -39,6 +64,7 @@ Upgrade to `gix` v0.83 and change the edition to 2024.
 <csr-read-only-do-not-edit/>
 
  - 5 commits contributed to the release.
+ - 122 days passed between releases.
  - 0 commits were understood as [conventional](https://www.conventionalcommits.org).
  - 0 issues like '(#ID)' were seen in commit messages
 
@@ -73,6 +99,7 @@ Update `gix` to v0.77, and update reqwest to 0.13.
 <csr-read-only-do-not-edit/>
 
  - 14 commits contributed to the release over the course of 63 calendar days.
+ - 254 days passed between releases.
  - 2 commits were understood as [conventional](https://www.conventionalcommits.org).
  - 0 issues like '(#ID)' were seen in commit messages
 
@@ -110,6 +137,7 @@ Update `gix` to v0.77, and update reqwest to 0.13.
 <csr-read-only-do-not-edit/>
 
  - 2 commits contributed to the release.
+ - 19 days passed between releases.
  - 1 commit was understood as [conventional](https://www.conventionalcommits.org).
  - 0 issues like '(#ID)' were seen in commit messages
 
@@ -135,6 +163,7 @@ Update `gix` to v0.77, and update reqwest to 0.13.
 <csr-read-only-do-not-edit/>
 
  - 3 commits contributed to the release.
+ - 164 days passed between releases.
  - 1 commit was understood as [conventional](https://www.conventionalcommits.org).
  - 0 issues like '(#ID)' were seen in commit messages
 
@@ -190,7 +219,7 @@ Upgrade `gix` to 0.63 and crates-index to use the same version of `gix` that con
 <csr-read-only-do-not-edit/>
 
  - 3 commits contributed to the release.
- - 85 days passed between releases.
+ - 86 days passed between releases.
  - 0 commits were understood as [conventional](https://www.conventionalcommits.org).
  - 0 issues like '(#ID)' were seen in commit messages
 
@@ -215,6 +244,7 @@ Upgrade `gix` to 0.63 and crates-index to use the same version of `gix` that con
 <csr-read-only-do-not-edit/>
 
  - 3 commits contributed to the release.
+ - 78 days passed between releases.
  - 1 commit was understood as [conventional](https://www.conventionalcommits.org).
  - 0 issues like '(#ID)' were seen in commit messages
 
@@ -239,7 +269,7 @@ Upgrade `gix` to 0.63 and crates-index to use the same version of `gix` that con
 <csr-read-only-do-not-edit/>
 
  - 2 commits contributed to the release.
- - 29 days passed between releases.
+ - 30 days passed between releases.
  - 1 commit was understood as [conventional](https://www.conventionalcommits.org).
  - 0 issues like '(#ID)' were seen in commit messages
 
@@ -303,6 +333,7 @@ of the `gix` dependency to version v0.57.
 <csr-read-only-do-not-edit/>
 
  - 6 commits contributed to the release.
+ - 42 days passed between releases.
  - 3 commits were understood as [conventional](https://www.conventionalcommits.org).
  - 0 issues like '(#ID)' were seen in commit messages
 
@@ -375,7 +406,7 @@ of the `gix` dependency to version v0.57.
 <csr-read-only-do-not-edit/>
 
  - 5 commits contributed to the release over the course of 10 calendar days.
- - 11 days passed between releases.
+ - 12 days passed between releases.
  - 2 commits were understood as [conventional](https://www.conventionalcommits.org).
  - 0 issues like '(#ID)' were seen in commit messages
 
@@ -402,7 +433,7 @@ of the `gix` dependency to version v0.57.
 <csr-read-only-do-not-edit/>
 
  - 3 commits contributed to the release over the course of 13 calendar days.
- - 13 days passed between releases.
+ - 14 days passed between releases.
  - 1 commit was understood as [conventional](https://www.conventionalcommits.org).
  - 0 issues like '(#ID)' were seen in commit messages
 
@@ -451,6 +482,7 @@ of the `gix` dependency to version v0.57.
 <csr-read-only-do-not-edit/>
 
  - 4 commits contributed to the release.
+ - 82 days passed between releases.
  - 1 commit was understood as [conventional](https://www.conventionalcommits.org).
  - 0 issues like '(#ID)' were seen in commit messages
 
@@ -507,7 +539,7 @@ of the `gix` dependency to version v0.57.
 <csr-read-only-do-not-edit/>
 
  - 2 commits contributed to the release.
- - 77 days passed between releases.
+ - 78 days passed between releases.
  - 1 commit was understood as [conventional](https://www.conventionalcommits.org).
  - 0 issues like '(#ID)' were seen in commit messages
 
@@ -567,7 +599,7 @@ of the `gix` dependency to version v0.57.
 <csr-read-only-do-not-edit/>
 
  - 5 commits contributed to the release over the course of 3 calendar days.
- - 3 days passed between releases.
+ - 4 days passed between releases.
  - 1 commit was understood as [conventional](https://www.conventionalcommits.org).
  - 1 unique issue was worked on: [#33](https://github.com/Byron/crates-index-diff-rs/issues/33)
 
@@ -638,6 +670,7 @@ build as well.
 <csr-read-only-do-not-edit/>
 
  - 9 commits contributed to the release.
+ - 1 day passed between releases.
  - 6 commits were understood as [conventional](https://www.conventionalcommits.org).
  - 1 unique issue was worked on: [#30](https://github.com/Byron/crates-index-diff-rs/issues/30)
 
@@ -766,7 +799,7 @@ for his contribution. Thank you!
 <csr-read-only-do-not-edit/>
 
  - 9 commits contributed to the release.
- - 9 days passed between releases.
+ - 10 days passed between releases.
  - 1 commit was understood as [conventional](https://www.conventionalcommits.org).
  - 1 unique issue was worked on: [#26](https://github.com/Byron/crates-index-diff-rs/issues/26)
 
@@ -806,6 +839,7 @@ for his contribution. Thank you!
 <csr-read-only-do-not-edit/>
 
  - 10 commits contributed to the release.
+ - 28 days passed between releases.
  - 0 commits were understood as [conventional](https://www.conventionalcommits.org).
  - 0 issues like '(#ID)' were seen in commit messages
 
@@ -841,6 +875,7 @@ for his contribution. Thank you!
 <csr-read-only-do-not-edit/>
 
  - 2 commits contributed to the release.
+ - 1 day passed between releases.
  - 1 commit was understood as [conventional](https://www.conventionalcommits.org).
  - 0 issues like '(#ID)' were seen in commit messages
 
@@ -940,7 +975,7 @@ This release is v11.2, but correctly indicates the **breaking change** introduce
 <csr-read-only-do-not-edit/>
 
  - 3 commits contributed to the release.
- - 8 days passed between releases.
+ - 9 days passed between releases.
  - 0 commits were understood as [conventional](https://www.conventionalcommits.org).
  - 1 unique issue was worked on: [#23](https://github.com/Byron/crates-index-diff-rs/issues/23)
 
@@ -1000,7 +1035,7 @@ This release is v11.2, but correctly indicates the **breaking change** introduce
 <csr-read-only-do-not-edit/>
 
  - 2 commits contributed to the release.
- - 11 days passed between releases.
+ - 12 days passed between releases.
  - 1 commit was understood as [conventional](https://www.conventionalcommits.org).
  - 1 unique issue was worked on: [#20](https://github.com/Byron/crates-index-diff-rs/issues/20)
 
@@ -1064,6 +1099,7 @@ This release is v11.2, but correctly indicates the **breaking change** introduce
 <csr-read-only-do-not-edit/>
 
  - 3 commits contributed to the release.
+ - 1 day passed between releases.
  - 1 commit was understood as [conventional](https://www.conventionalcommits.org).
  - 0 issues like '(#ID)' were seen in commit messages
 
@@ -1207,7 +1243,7 @@ This release is v11.2, but correctly indicates the **breaking change** introduce
 <csr-read-only-do-not-edit/>
 
  - 5 commits contributed to the release over the course of 1 calendar day.
- - 1 day passed between releases.
+ - 2 days passed between releases.
  - 2 commits were understood as [conventional](https://www.conventionalcommits.org).
  - 1 unique issue was worked on: [#16](https://github.com/Byron/crates-index-diff-rs/issues/16)
 
@@ -1327,7 +1363,7 @@ This release is v11.2, but correctly indicates the **breaking change** introduce
 <csr-read-only-do-not-edit/>
 
  - 10 commits contributed to the release over the course of 84 calendar days.
- - 85 days passed between releases.
+ - 86 days passed between releases.
  - 2 commits were understood as [conventional](https://www.conventionalcommits.org).
  - 0 issues like '(#ID)' were seen in commit messages
 
@@ -1394,7 +1430,7 @@ This release is v11.2, but correctly indicates the **breaking change** introduce
 <csr-read-only-do-not-edit/>
 
  - 4 commits contributed to the release.
- - 197 days passed between releases.
+ - 198 days passed between releases.
  - 0 commits were understood as [conventional](https://www.conventionalcommits.org).
  - 0 issues like '(#ID)' were seen in commit messages
 
@@ -1449,7 +1485,7 @@ This release is v11.2, but correctly indicates the **breaking change** introduce
 <csr-read-only-do-not-edit/>
 
  - 2 commits contributed to the release over the course of 1 calendar day.
- - 4 days passed between releases.
+ - 5 days passed between releases.
  - 0 commits were understood as [conventional](https://www.conventionalcommits.org).
  - 0 issues like '(#ID)' were seen in commit messages
 
@@ -1497,7 +1533,7 @@ This release is v11.2, but correctly indicates the **breaking change** introduce
 <csr-read-only-do-not-edit/>
 
  - 5 commits contributed to the release over the course of 43 calendar days.
- - 54 days passed between releases.
+ - 55 days passed between releases.
  - 0 commits were understood as [conventional](https://www.conventionalcommits.org).
  - 0 issues like '(#ID)' were seen in commit messages
 
@@ -1617,7 +1653,7 @@ This release is v11.2, but correctly indicates the **breaking change** introduce
 <csr-read-only-do-not-edit/>
 
  - 1 commit contributed to the release.
- - 1 day passed between releases.
+ - 2 days passed between releases.
  - 0 commits were understood as [conventional](https://www.conventionalcommits.org).
  - 0 issues like '(#ID)' were seen in commit messages
 
@@ -1642,7 +1678,7 @@ This release is v11.2, but correctly indicates the **breaking change** introduce
 <csr-read-only-do-not-edit/>
 
  - 4 commits contributed to the release over the course of 10 calendar days.
- - 10 days passed between releases.
+ - 11 days passed between releases.
  - 0 commits were understood as [conventional](https://www.conventionalcommits.org).
  - 0 issues like '(#ID)' were seen in commit messages
 
@@ -1666,7 +1702,7 @@ This release is v11.2, but correctly indicates the **breaking change** introduce
 <csr-read-only-do-not-edit/>
 
  - 2 commits contributed to the release over the course of 13 calendar days.
- - 13 days passed between releases.
+ - 14 days passed between releases.
  - 0 commits were understood as [conventional](https://www.conventionalcommits.org).
  - 0 issues like '(#ID)' were seen in commit messages
 
@@ -1710,6 +1746,7 @@ This release is v11.2, but correctly indicates the **breaking change** introduce
 <csr-read-only-do-not-edit/>
 
  - 2 commits contributed to the release.
+ - 1 day passed between releases.
  - 0 commits were understood as [conventional](https://www.conventionalcommits.org).
  - 0 issues like '(#ID)' were seen in commit messages
 
@@ -1808,7 +1845,7 @@ This release is v11.2, but correctly indicates the **breaking change** introduce
 <csr-read-only-do-not-edit/>
 
  - 2 commits contributed to the release.
- - 47 days passed between releases.
+ - 48 days passed between releases.
  - 0 commits were understood as [conventional](https://www.conventionalcommits.org).
  - 0 issues like '(#ID)' were seen in commit messages
 
@@ -1830,6 +1867,7 @@ This release is v11.2, but correctly indicates the **breaking change** introduce
 <csr-read-only-do-not-edit/>
 
  - 2 commits contributed to the release.
+ - 475 days passed between releases.
  - 0 commits were understood as [conventional](https://www.conventionalcommits.org).
  - 0 issues like '(#ID)' were seen in commit messages
 
@@ -1858,7 +1896,7 @@ This release is v11.2, but correctly indicates the **breaking change** introduce
 <csr-read-only-do-not-edit/>
 
  - 6 commits contributed to the release.
- - 441 days passed between releases.
+ - 442 days passed between releases.
  - 0 commits were understood as [conventional](https://www.conventionalcommits.org).
  - 0 issues like '(#ID)' were seen in commit messages
 
@@ -1918,6 +1956,7 @@ Add a tutorial to the documentation.
 <csr-read-only-do-not-edit/>
 
  - 1 commit contributed to the release.
+ - 1 day passed between releases.
  - 1 commit was understood as [conventional](https://www.conventionalcommits.org).
  - 0 issues like '(#ID)' were seen in commit messages
 
