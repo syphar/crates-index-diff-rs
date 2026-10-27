@@ -129,7 +129,7 @@ impl Index {
     // TODO: update this once it's clear how auto-gc works in `gitoxide`.
     pub fn peek_changes_with_options<P>(
         &self,
-        mut progress: P,
+        progress: P,
         should_interrupt: &AtomicBool,
         order: Order,
     ) -> Result<(Vec<Change>, gix::hash::ObjectId), Error>
@@ -143,6 +143,40 @@ impl Index {
             .ok()
             .and_then(|r| r.try_id().map(|id| id.detach()))
             .unwrap_or_else(|| gix::hash::ObjectId::empty_tree(repo.object_hash()));
+        let to = self.fetch_remote_tip_with_options(progress, should_interrupt)?;
+
+        Ok((
+            match order {
+                Order::ImplementationDefined => self.changes_between_commits(from, to)?,
+                Order::AsInCratesIndex => self.changes_between_ancestor_commits(from, to)?.0,
+            },
+            to,
+        ))
+    }
+
+    /// Fetch the configured remote branch and return its current commit ID.
+    ///
+    /// A GitHub check may establish that the branch is unchanged, in which case no Git fetch is
+    /// needed. Otherwise, fetching may update local remote-tracking references. This method does
+    /// not create or update [`Self::last_seen_reference()`].
+    ///
+    /// The `progress` and `should_interrupt` parameters provide progress for the fetch and allow
+    /// it to be interrupted gracefully.
+    pub fn fetch_remote_tip_with_options<P>(
+        &self,
+        mut progress: P,
+        should_interrupt: &AtomicBool,
+    ) -> Result<gix::hash::ObjectId, Error>
+    where
+        P: gix::NestedProgress,
+        P::SubProgress: 'static,
+    {
+        let from = self
+            .repo
+            .find_reference(self.seen_ref_name)
+            .ok()
+            .and_then(|r| r.try_id().map(|id| id.detach()))
+            .unwrap_or_else(|| gix::hash::ObjectId::empty_tree(self.repo.object_hash()));
         let to = {
             let mut remote = self
                 .remote_name
@@ -229,13 +263,7 @@ impl Index {
             }
         };
 
-        Ok((
-            match order {
-                Order::ImplementationDefined => self.changes_between_commits(from, to)?,
-                Order::AsInCratesIndex => self.changes_between_ancestor_commits(from, to)?.0,
-            },
-            to,
-        ))
+        Ok(to)
     }
 
     /// Similar to [`Self::changes()`], but requires `from` and `to` objects to be provided. They may point

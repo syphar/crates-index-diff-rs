@@ -46,6 +46,27 @@ fn peek_changes() -> crate::Result {
 }
 
 #[test]
+fn remote_tip_can_initialize_last_seen_reference() -> crate::Result {
+    let (index, _tmp) = index_rw()?;
+    let tip = index.fetch_remote_tip_with_options(gix::progress::Discard, &AtomicBool::default())?;
+    assert!(index.last_seen_reference().is_err());
+    assert_eq!(
+        tip,
+        index
+            .repository()
+            .find_reference("refs/remotes/origin/main")?
+            .id()
+            .detach()
+    );
+
+    index.set_last_seen_reference(tip)?;
+    let (changes, new_tip) = index.peek_changes_ordered()?;
+    assert!(changes.is_empty());
+    assert_eq!(new_tip, tip);
+    Ok(())
+}
+
+#[test]
 fn clone_if_needed() {
     let tmp = TempDir::new().unwrap();
     let no_interrupt = &AtomicBool::default();
